@@ -1,0 +1,66 @@
+﻿
+
+<div class="container-fluid px-0 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-lg-4 text-center bg-secondary py-3">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                <i class="bi bi-envelope fs-1 text-primary me-3"></i>
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1">Email Us</h6>
+                    <span>info@example.com</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center bg-primary border-inner py-3">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="m-0 text-uppercase text-white"><i class="fa fa-film fs-1 text-dark me-3"></i>CinemaZone</h1>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center bg-secondary py-3">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1">Call Us</h6>
+                    <span>+012 345 6789</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+    <a href="index.html" class="navbar-brand d-block d-lg-none">
+        <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-primary me-3"></i>CakeZone</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="margin-left: 50px; display:flex">
+            <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+        
+    <div class="navbar-nav ms-auto mx-lg-auto py-0">
+    <a class="nav-item nav-link active" asp-controller="Movies" asp-action="Index">Movies</a>
+     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+      {
+        <a class="nav-item nav-link" asp-controller="Cinemas" asp-action="Index">Cinemas</a>
+        <a class="nav-item nav-link" asp-controller="Actors" asp-action="Index">Actors</a>
+        <a class="nav-item nav-link" asp-controller="Producers" asp-action="Index">Producers</a>
+     }          
+     </div>
+      
+        
+        <ul class="navbar-nav">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </ul>
+
+        <partial name ="_Identity" />
+
+
+    </div>
+</nav>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Producer>
+
+@{
+	ViewData["Title"] = "List of Producers";
+}
+
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="text-md-center">@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+					<th class="text-md-center">@Html.DisplayNameFor(model => model.FullName)</th>
+					<th class="text-md-center">@Html.DisplayNameFor(model => model.Bio)</th>
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+					{
+						<th class="text-md-center">Actions</th>
+					}
+					
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var item in Model)
+				{
+					<tr>
+						<td class="align-middle text-md-center" style="padding: 10px">
+							<img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width:150px"> 
+						</td>
+						<td class="align-middle text-md-center" style="padding: 10px">
+							@Html.DisplayFor(modelItem => item.FullName)
+						</td>
+						<td class="align-middle text-md-center" style="padding: 10px">
+							@Html.DisplayFor(modelItem => item.Bio)
+						</td>
+
+
+						@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+						{
+							<td class="align-middle text-md-center" style="padding: 10px">
+								<a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i> Edit </a> |
+								<a class="btn btn-outline-info " asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details</a> |
+								<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> Delete </a> |
+							</td>
+						}
+						
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<a class="btn btn-success text-white" asp-action="Create" style="right: 220px; bottom: 20px;position: fixed;"><i class="bi bi-plus"></i> Add New </a>
